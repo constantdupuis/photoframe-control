@@ -3,28 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule} from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSelectModule } from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
+
+import { MaterialModule} from './material-module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ControlsComponent } from './views/controls/controls.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ControlsComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatFormFieldModule
+    MaterialModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
