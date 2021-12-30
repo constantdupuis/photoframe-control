@@ -8,7 +8,6 @@ import { MaterialModule} from './material-module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ControlsComponent } from './views/controls/controls.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
