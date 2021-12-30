@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { SelectItem } from '../models/models';
 import { BehaviorSubject } from 'rxjs';
-import { MQTTService } from './mqtt.service';
+import { AnimationQueryMetadata } from '@angular/animations';
+import { IMqttMessage, MqttService, MqttConnectionState } from 'ngx-mqtt';
+import { JsonpClientBackend } from '@angular/common/http';
 
 
 @Injectable({
@@ -10,28 +12,30 @@ import { MQTTService } from './mqtt.service';
 export class ModelService {
   subjectLoaded = new BehaviorSubject(false);
 
-  subDirectories : Array<SelectItem> = [{value : "", viewValue : "All"},{value : "Family", viewValue : "Family"}, {value : "Fantasy", viewValue : "Fantasy"},{value : "Abstract", viewValue : "Abstract"}];
+  subDirectories: Array<SelectItem> = [{ value: "", viewValue: "All" }, { value: "Family", viewValue: "Family" }, { value: "Fantasy", viewValue: "Fantasy" }, { value: "Abstract", viewValue: "Abstract" }];
   selectedSubDirectories = 0;
 
-  constructor( private mqtt : MQTTService ) {
+  constructor(private mqtt: MqttService) {
     console.log("ModelService::constructor");
 
-    // when MQTT is connected subscribe to topics
-    mqtt.subjectConnected.subscribe({
-      next: (v) => {
-        if( v == true)
-        {
-          console.log("ModelService MQTTService connected");
-          // mqtt.client().on("message", (topic, message) => {
-          //   console.log(`Received MQTT message`);
-          //   console.log(` Topic   ${topic}`);
-          //   console.log(` Message ${message}`);
-          // })
-          // mqtt.client().subscribe("frame/states");
-        }
+    this.mqtt.state.subscribe({
+      next: (s) => {
+        console.log(`mqtt state changed ${s}`);
+        if( s == MqttConnectionState.CONNECTED)
+        {}
       }
     });
-   
+
+    this.mqtt.observe("frame/states/#").subscribe((msg: IMqttMessage) => {
+      console.log(`MQTT message received`);
+      console.log(` Topic   ${msg.topic}`);
+      console.log(` Payload ${msg.payload}`);
+      
+      if (msg.topic.endsWith("subdirectories")) {
+        let subs = JSON.parse(msg.payload.toString());
+        console.log(` subs ${subs[0]}`);
+      }
+    });
   }
 
 
