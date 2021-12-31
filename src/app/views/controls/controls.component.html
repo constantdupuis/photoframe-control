@@ -8,19 +8,8 @@
 
   <mat-form-field class="example-full-width">
     <mat-label>Category</mat-label>
-    <mat-select>
-      <mat-option>
-        All
-      </mat-option>
-      <mat-option value="Famille">
-        Famille
-      </mat-option>
-      <mat-option value="Fantasy">
-        Fantasy
-      </mat-option>
-      <mat-option value="Abstract">
-        Abstract
-      </mat-option>
+    <mat-select (selectionChange)="subDirectoryChanged($event)">
+      <mat-option *ngFor="let sub of model.subDirectories" [value]="sub.value">{{sub.viewValue}}</mat-option>
     </mat-select>
   </mat-form-field>
 </form>

@@ -7,6 +7,8 @@ import {
   faSlidersH
  } from '@fortawesome/free-solid-svg-icons';
 
+import { MatSelectChange } from '@angular/material/select';
+
 
 @Component({
   selector: 'app-controls',
@@ -19,7 +21,13 @@ export class ControlsComponent implements OnInit {
   faPlay = faPlay;
   faSlidersH = faSlidersH;
 
-  constructor( private model: ModelService ) { }
+  constructor( public model: ModelService ) { }
+
+  subDirectoryChanged( ev : MatSelectChange)
+  {
+    console.log(ev);
+    this.model.setSubDirectory(ev.value);
+  }
 
   ngOnInit(): void {
   }
