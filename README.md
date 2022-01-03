@@ -1,5 +1,25 @@
 # PhotoframeControl
 
+## References
+
+Installation Docker sur Rasberry pi
+https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo
+https://docs.docker.com/engine/install/debian/
+
+
+
+
+
+
+
+
+
+
+
+
+
+# PhotoframeControl
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
 ## Development server

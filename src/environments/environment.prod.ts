@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   mqtt :{
-    server : "photoframe.cod.lan",
+    server : "localhost",
     port : 9001,
     protocol : "ws"
   }
