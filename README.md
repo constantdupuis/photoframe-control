@@ -2,20 +2,13 @@
 
 ## References
 
-Installation Docker sur Rasberry pi
+### Installation Docker sur Rasberry pi
 https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo
 https://docs.docker.com/engine/install/debian/
 
-
-
-
-
-
-
-
-
-
-
+### Build arm (multiarch) Docker image
+https://docs.docker.com/desktop/multi-arch/
+https://www.docker.com/blog/multi-arch-images/
 
 
 # PhotoframeControl
