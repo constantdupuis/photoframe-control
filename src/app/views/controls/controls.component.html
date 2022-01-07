@@ -1,14 +1,18 @@
 <form class="example-form">
   <p>
-    <button mat-flat-button  color="primary">
+    <button *ngIf="!model.paused" (click)="setPaused(true)" mat-flat-button color="primary">
       <fa-icon [icon]="faPause"></fa-icon>
-      Pause/Resume
+      Pause
+    </button>
+    <button *ngIf="model.paused" (click)="setPaused(false)" mat-flat-button color="primary">
+      <fa-icon [icon]="faPause"></fa-icon>
+      Resume
     </button>
   </p>
 
   <mat-form-field class="example-full-width">
     <mat-label>Category</mat-label>
-    <mat-select (selectionChange)="subDirectoryChanged($event)">
+    <mat-select [(value)]="selectedCategory" (selectionChange)="subDirectoryChanged($event)" >
       <mat-option *ngFor="let sub of model.subDirectories" [value]="sub.value">{{sub.viewValue}}</mat-option>
     </mat-select>
   </mat-form-field>

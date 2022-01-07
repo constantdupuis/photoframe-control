@@ -42,6 +42,7 @@ export class ModelService {
       
       if (msg.topic.endsWith("subdirectories")) {
         let subs = JSON.parse(msg.payload.toString());
+        console.log(`model.service - received subdirectories ${subs}`);
         subs.forEach( (el : string) => {
           this.subDirectories.push({value : el, viewValue : el})
         });
@@ -49,7 +50,7 @@ export class ModelService {
       else if(msg.topic.endsWith("subdirectory"))
       {
         this.selectedSubDirectory = msg.payload.toString();
-        console.log(` Subdirectory ${this.selectedSubDirectory}`);
+        console.log(`model.service - received subdirectory ${this.selectedSubDirectory}`);
       }
       else if(msg.topic.endsWith("paused"))
       { 
@@ -59,18 +60,26 @@ export class ModelService {
         } else {
           this.paused = true;
         } 
-        console.log(` Paused ${this.paused}`);
+        console.log(`model.service - received paused ${this.paused}`);
       }
     });
   }
 
-  setSubDirectory( sub : string)
+  setSubDirectory(sub : string) : void
   {
     this.mqtt.unsafePublish("frame/subdirectory", sub);
+    this.selectedSubDirectory = sub;
+  }
+
+  setPaused(paused : boolean) : void
+  {
+    let payload = "False";
+    if( paused) payload = "True";
+    this.mqtt.unsafePublish("frame/paused", payload);
+    this.paused = paused;
   }
 
   ngOnDestroy(): void {
     console.log("ModelService::ngOnDestroy");
-
   }
 }
